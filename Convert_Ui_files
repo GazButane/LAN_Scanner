@@ -1,0 +1,1 @@
+pyuic6 LS_MainWindow.ui -o LS_MainWindow.py && pyuic6 OBJWidget.ui -o OBJWidget.py
