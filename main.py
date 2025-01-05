@@ -1,3 +1,13 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#   ____             ____        _                    +
+#  / ___| __ _ ____ | __ ) _   _| |_ __ _ _ __   ___  +
+# | |  _ / _` |_  / |  _ \| | | | __/ _` | '_ \ / _ \ +
+# | |_| | (_| |/ /  | |_) | |_| | || (_| | | | |  __/ +
+#  \____|\__,_/___| |____/ \__,_|\__\__,_|_| |_|\___| +
+#                - Gaz Butane, 2025 -                 +
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 import getpass
 import os
 import sys
@@ -9,6 +19,7 @@ from PyQt6.QtWidgets import QLineEdit, QDialog, QFileDialog, QApplication, QPush
     QVBoxLayout, QMessageBox
 from PyQt6.QtCore import Qt
 from pythonping import ping
+import requests
 
 from LS_MainWindow import Ui_MainWindow
 from OBJWidget import Ui_Form
@@ -39,6 +50,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def SetupApp(self):
         self.ClearServerList()
         self.CloseServerDetailsTab()
+        self.ServersAmount.setText("0")
 
     def CloseServerDetailsTab(self):
         self.ServerDetailsTab.setVisible(False)
@@ -78,6 +90,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.SDT_IpAdress.setText(objectIP)
         self.SDT_Hostname.setText(objectHOSTNAME)
         self.SDT_MacAdress.setText(objectMAC)
+        try:
+            url = f"https://api.macvendors.com/{objectMAC}"
+            response = requests.get(url)
+            if response.status_code == 200:
+                self.SDT_VendorName.setText(response.text)
+            else:
+                self.SDT_VendorName.setText("Vendor not found")
+        except Exception as e:
+            print(f"Error : {e}")
+
         self.updatePingDisplay()
 
         self.ServerDetailsTab.setVisible(True)
@@ -88,6 +110,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if devices:
             print("\nIP\t\t\tMAC Address")
             print("-----------------------------------------")
+            print(f"List of devices:--------- {devices}")
+            LenDevices = 0
             for device in devices:
                 print(f"{device['ip']}\t\t{device['mac']}")
 
@@ -99,6 +123,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 objWidget.ServerNameLabel.setText(device["hostname"])
                 objWidget.MoreInfoButton.clicked.connect(lambda checked, ObjectIP = (device["ip"]), ObjectMAC = (device["mac"]), ObjectHOSTNAME = (device["hostname"]): self.displayServerInfo(ObjectIP, ObjectMAC, ObjectHOSTNAME))
                 self.scrollAreaWidgetContents.layout().addWidget(OBJWidget)
+                LenDevices += 1
+
+            self.ServersAmount.setText(str(LenDevices))
         else:
             print("No devices found.")
 
@@ -121,13 +148,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         devices = []
         for element in answered_list:
-            print(element[1].psrc)
-            try:
-                hostname = socket.gethostbyaddr(element[1].psrc)[0]
-            except:
-                print(socket.getfqdn(element[1].psrc))
-                print("Unknown Host")
-                hostname = str("Unknown Host")
+            ip = element[1].psrc
+            hostname = self.getDeviceName(ip)
 
             device = {'ip': element[1].psrc, 'mac': element[1].hwsrc, 'hostname': hostname}
             devices.append(device)
@@ -135,6 +157,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         return devices
 
+    def getDeviceName(self,ip):
+        # Try with socket
+        try:
+            hostname = socket.gethostbyaddr(ip)[0]
+            if hostname != ip:
+                return hostname
+        except socket.herror:
+            pass
+        # Try with mdns
+        try:
+            result = subprocess.run(['avahi-resolve', '-a', ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    text=True)
+            if result.returncode == 0:
+                hostname = result.stdout.split('\t')[-1].strip()
+            #hostname = "Unknown host"
+        except Exception as e:
+            hostname = f"Error : {e}"
+
+        if hostname and hostname != "Name unreachable":
+            return hostname
+
+        return "Unknown Host"
 
     def DoLanScan(self):
         self.ClearServerList()

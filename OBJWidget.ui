@@ -72,6 +72,9 @@ border-radius: 15px;
            <pointsize>20</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: #FFBB00;</string>
+         </property>
          <property name="text">
           <string>Default Server</string>
          </property>
