@@ -51,6 +51,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ClearServerList()
         self.CloseServerDetailsTab()
         self.ServersAmount.setText("0")
+        IpRangeFile = open("LastIpRange.txt", "r")
+        IpRange = IpRangeFile.read()
+        IpRangeFile.close()
+        self.IPRangeEditor.setText(IpRange)
 
     def CloseServerDetailsTab(self):
         self.ServerDetailsTab.setVisible(False)
@@ -186,6 +190,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         devices = self.scan(ip_range)
         self.display_devices(devices)
         self.LanScanButton.setText("Lan Scan")
+        IpRangeFile = open("LastIpRange.txt", "w")
+        IpRangeFile.write(self.IPRangeEditor.text())
+        IpRangeFile.close()
 
 
 app = QtWidgets.QApplication(sys.argv)
