@@ -23,7 +23,7 @@
    <string notr="true">QWidget{
 
 color: #F3F3F3;
-background-color: #00171F;
+background-color: #101010;
 border-radius: 15px;
 
 }</string>
@@ -174,7 +174,7 @@ color: #FFBB00;
 }</string>
          </property>
          <property name="text">
-          <string>More...</string>
+          <string>Details</string>
          </property>
         </widget>
        </item>

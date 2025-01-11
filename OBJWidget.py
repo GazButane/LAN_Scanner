@@ -21,7 +21,7 @@ class Ui_Form(object):
         Form.setStyleSheet("QWidget{\n"
 "\n"
 "color: #F3F3F3;\n"
-"background-color: #00171F;\n"
+"background-color: #101010;\n"
 "border-radius: 15px;\n"
 "\n"
 "}")
@@ -115,4 +115,4 @@ class Ui_Form(object):
         self.ServerNameLabel.setText(_translate("Form", "Default Server"))
         self.IpAdressLabel.setText(_translate("Form", "IP_ADRESS"))
         self.MacAdressLabel.setText(_translate("Form", "MAC_ADRESS"))
-        self.MoreInfoButton.setText(_translate("Form", "More..."))
+        self.MoreInfoButton.setText(_translate("Form", "Details"))

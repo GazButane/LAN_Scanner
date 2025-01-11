@@ -27,7 +27,7 @@
    <string notr="true">QMainWindow{
 
 color: #2E3436;
-background-color: #101010;
+background-color: #1B2429;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -35,7 +35,7 @@ background-color: #101010;
     <string notr="true">QWidget{
 
 color: #2E3436;
-background-color: #101010;
+background-color: #1B2429;
 }</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -124,22 +124,11 @@ background-color: #101010;
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">color: white;</string>
+           <string notr="true">color: white;
+background-color: #101010;
+border-radius: 15px;</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="font">
-              <font>
-               <family>Comfortaa</family>
-               <pointsize>15</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Server found:</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1">
             <widget class="QLabel" name="ServersAmount">
              <property name="font">
@@ -155,6 +144,32 @@ background-color: #101010;
               <string>SERVERSAMOUNT</string>
              </property>
             </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <family>Comfortaa</family>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Server found:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -178,7 +193,7 @@ background-color: #101010;
         <item>
          <widget class="QWidget" name="ServerDetailsTab" native="true">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -191,14 +206,54 @@ background-color: #101010;
           </property>
           <property name="maximumSize">
            <size>
-            <width>400</width>
+            <width>16777215</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">color: white;</string>
+           <string notr="true">color: white;
+background-color: #101010;
+border-radius: 15px;</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
+           <item row="4" column="2">
+            <widget class="QLabel" name="SDT_IpAdress">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>IPADRESS</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="SDT_VendorName">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>VENDORNAME</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="label_10">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Vendor:</string>
+             </property>
+            </widget>
+           </item>
            <item row="8" column="2">
             <widget class="QPushButton" name="SDT_CloseTab">
              <property name="styleSheet">
@@ -227,55 +282,6 @@ color: #A40000;
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="SDT_VendorName">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>VENDORNAME</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="2">
-            <widget class="QLabel" name="SDT_IpAdress">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>IPADRESS</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QLabel" name="label_9">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>MAC Adress:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QLabel" name="label_6">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Ping:</string>
-             </property>
-            </widget>
-           </item>
            <item row="6" column="2">
             <widget class="QLabel" name="SDT_PingResult">
              <property name="font">
@@ -291,16 +297,68 @@ color: #A40000;
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
-            <widget class="QLabel" name="label_10">
+           <item row="6" column="1">
+            <widget class="QLabel" name="label_6">
              <property name="font">
               <font>
                <pointsize>12</pointsize>
-               <bold>true</bold>
               </font>
              </property>
              <property name="text">
-              <string>Vendor:</string>
+              <string>Ping:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <family>Comfortaa</family>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: white;</string>
+             </property>
+             <property name="text">
+              <string>Server details:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="SDT_MacAdress">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>MACADRESS</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="SDT_Hostname">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>HOSTNAME</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_9">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>MAC Adress:</string>
              </property>
             </widget>
            </item>
@@ -316,6 +374,34 @@ color: #A40000;
               <string>Name:</string>
              </property>
             </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>IP Adress:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="3">
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>50</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item row="8" column="1">
             <widget class="QPushButton" name="SDT_ReloadButton">
@@ -360,75 +446,6 @@ color: #FFBB00;
              </property>
              <property name="text">
               <string>Reload</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QLabel" name="SDT_MacAdress">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>MACADRESS</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLabel" name="label_7">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>IP Adress:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_4">
-             <property name="font">
-              <font>
-               <family>Comfortaa</family>
-               <pointsize>15</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: white;</string>
-             </property>
-             <property name="text">
-              <string>Server details:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Expanding</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>50</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="SDT_Hostname">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>HOSTNAME</string>
              </property>
             </widget>
            </item>
@@ -554,6 +571,18 @@ color: #FFBB00;
             <height>0</height>
            </size>
           </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -562,8 +591,8 @@ color: #FFBB00;
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>698</width>
-             <height>584</height>
+             <width>700</width>
+             <height>586</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3"/>
@@ -588,8 +617,6 @@ color: #FFBB00;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="RESSOURCES.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
