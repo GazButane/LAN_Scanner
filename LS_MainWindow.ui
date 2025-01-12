@@ -226,6 +226,9 @@ border-radius: 15px;</string>
              <property name="text">
               <string>IPADRESS</string>
              </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+             </property>
             </widget>
            </item>
            <item row="2" column="2">
@@ -238,6 +241,9 @@ border-radius: 15px;</string>
              </property>
              <property name="text">
               <string>VENDORNAME</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
              </property>
             </widget>
            </item>
@@ -336,6 +342,9 @@ color: #A40000;
              <property name="text">
               <string>MACADRESS</string>
              </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+             </property>
             </widget>
            </item>
            <item row="1" column="2">
@@ -347,6 +356,9 @@ color: #A40000;
              </property>
              <property name="text">
               <string>HOSTNAME</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
              </property>
             </widget>
            </item>

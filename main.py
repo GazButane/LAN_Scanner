@@ -20,7 +20,7 @@ from PyQt6.QtWidgets import QLineEdit, QDialog, QFileDialog, QApplication, QPush
 from PyQt6.QtCore import Qt
 from pythonping import ping
 import requests
-
+import platform
 from LS_MainWindow import Ui_MainWindow
 from OBJWidget import Ui_Form
 
@@ -47,6 +47,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 print(f"Erreur : Impossible de relancer avec sudo. {e}")
             sys.exit(1)
 
+
     def SetupApp(self):
         self.ClearServerList()
         self.CloseServerDetailsTab()
@@ -56,8 +57,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         IpRangeFile.close()
         self.IPRangeEditor.setText(IpRange)
 
+
     def CloseServerDetailsTab(self):
         self.ServerDetailsTab.setVisible(False)
+
 
     def ClearServerList(self):
         layout = self.scrollAreaWidgetContents.layout()
@@ -69,6 +72,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     widget.setParent(None)
                     widget.deleteLater()
 
+
+    def pushNotif(self,title, message):
+        plt = platform.system()
+
+        if plt == 'Darwin':
+            command = f'''
+            osascript -e 'display notification "{message}" with title "{title}"'
+            '''
+        if plt == 'Linux':
+            command = f'''
+            notify-send -i LSIcon.png "{title}" "{message}"
+            '''
+        else:
+            return
+
+        os.system(command)
+
+
     def Pingsever(self, server):
         pingResult = ping(target=server, count=5, timeout=2)
         return {
@@ -78,6 +99,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             'max_latency': pingResult.rtt_max_ms,
             'packet_loss': pingResult.packet_loss
         }
+
 
     def updatePingDisplay(self):
         pingResult = self.Pingsever(self.SDT_IpAdress.text())["avg_latency"]
@@ -109,7 +131,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ServerDetailsTab.setVisible(True)
 
 
-
     def display_devices(self,devices):
         if devices:
             print("\nIP\t\t\tMAC Address")
@@ -132,7 +153,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ServersAmount.setText(str(LenDevices))
         else:
             print("No devices found.")
-
 
 
     def scan(self,ip_range):
@@ -161,6 +181,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         return devices
 
+
     def getDeviceName(self,ip):
         # Try with socket
         try:
@@ -184,12 +205,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         return "Unknown Host"
 
+
     def DoLanScan(self):
+        self.pushNotif("Lan Scanner:","LAN network analysis starts, please wait")
         self.ClearServerList()
         ip_range = str(self.IPRangeEditor.text())
         devices = self.scan(ip_range)
         self.display_devices(devices)
         self.LanScanButton.setText("Lan Scan")
+        self.pushNotif("Lan Scanner:", f"Analysis finished !")
         IpRangeFile = open("LastIpRange.txt", "w")
         IpRangeFile.write(self.IPRangeEditor.text())
         IpRangeFile.close()
